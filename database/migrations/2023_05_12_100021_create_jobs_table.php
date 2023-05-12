@@ -19,13 +19,6 @@ return new class extends Migration
             $table->float('total_hours');
             $table->timestamps();
             $table->softDeletes();
-
-            $table
-                ->foreign('employee_id')
-                ->references('id')
-                ->on('professors')
-                ->onDelete('cascade')
-            ;
         });
     }
 

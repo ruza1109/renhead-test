@@ -11,15 +11,20 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('traders', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('email');
-            $table->string('first_name');
-            $table->string('last_name');
-            $table->enum('type', ['APPROVER', 'NON_APPROVER']);
-            $table->string('password');
+            $table->unsignedInteger('user_id');
+            $table->float('working_hours');
+            $table->float('payroll_per_hour');
             $table->timestamps();
             $table->softDeletes();
+
+            $table
+                ->foreign('user_id')
+                ->references('id')
+                ->on('users')
+                ->onDelete('cascade')
+            ;
         });
     }
 
@@ -28,6 +33,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('traders');
     }
 };

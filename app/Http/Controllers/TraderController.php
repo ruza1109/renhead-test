@@ -45,9 +45,9 @@ class TraderController extends Controller
 
     public function update(UpdateTraderRequest $request, Trader $trader): JsonResponse
     {
-        $user = $this->traderService->update($trader, $request->validated());
+        $trader = $this->traderService->update($trader, $request->validated());
 
-        return response()->json([$user]);
+        return response()->json([$trader]);
     }
 
     public function delete(Trader $trader): JsonResponse

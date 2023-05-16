@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ProfessorController;
 use App\Http\Controllers\TraderController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -36,5 +37,13 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/{trader}', [TraderController::class, 'show']);
         Route::patch('/{trader}', [TraderController::class, 'update']);
         Route::delete('/{trader}', [TraderController::class, 'delete']);
+    });
+
+    Route::prefix('/professors')->group(function () {
+        Route::get('/', [ProfessorController::class, 'index']);
+        Route::post('/', [ProfessorController::class, 'store']);
+        Route::get('/{professor}', [ProfessorController::class, 'show']);
+        Route::patch('/{professor}', [ProfessorController::class, 'update']);
+        Route::delete('/{professor}', [ProfessorController::class, 'delete']);
     });
 });

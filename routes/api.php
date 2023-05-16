@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ApprovalController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\JobController;
 use App\Http\Controllers\ProfessorController;
@@ -55,4 +56,6 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::patch('/{job}', [JobController::class, 'update']);
         Route::delete('/{job}', [JobController::class, 'delete']);
     });
+
+    Route::post('/approvals/{job}/approve', [ApprovalController::class, 'approve']);
 });

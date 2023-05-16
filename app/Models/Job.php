@@ -23,7 +23,7 @@ class Job extends Model
 
     public function approval(): BelongsTo
     {
-        return $this->belongsTo(Approval::class);
+        return $this->belongsTo(Approval::class, 'id', 'job_id');
     }
 
     public function employee(): MorphTo

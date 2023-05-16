@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\TraderController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -27,5 +28,13 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/{user}', [UserController::class, 'show']);
         Route::patch('/{user}', [UserController::class, 'update']);
         Route::delete('/{user}', [UserController::class, 'delete']);
+    });
+
+    Route::prefix('/traders')->group(function () {
+        Route::get('/', [TraderController::class, 'index']);
+        Route::post('/', [TraderController::class, 'store']);
+        Route::get('/{trader}', [TraderController::class, 'show']);
+        Route::patch('/{trader}', [TraderController::class, 'update']);
+        Route::delete('/{trader}', [TraderController::class, 'delete']);
     });
 });

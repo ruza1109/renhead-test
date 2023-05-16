@@ -26,7 +26,6 @@ class AuthController extends Controller
             email: $request['email'],
             firstName: $request['first_name'],
             lastName: $request['last_name'],
-            type: $request['type'],
             password: $request['password']
         );
 

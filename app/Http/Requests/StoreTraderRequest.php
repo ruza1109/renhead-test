@@ -2,11 +2,7 @@
 
 namespace App\Http\Requests;
 
-use App\Enums\UserType;
-use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
-
-class StoreUserRequest extends FormRequest
+class StoreTraderRequest extends StoreUserRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,11 +19,11 @@ class StoreUserRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            'email'         => 'required|string|unique:users,email',
-            'first_name'    => 'required|string',
-            'last_name'     => 'required|string',
-            'password'      => 'required|string',
-        ];
+        $parent = parent::rules();
+
+        return array_merge($parent, [
+            'working_hours' => 'required|numeric',
+            'payroll_per_hour' => 'required|numeric',
+        ]);
     }
 }

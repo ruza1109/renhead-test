@@ -2,11 +2,9 @@
 
 namespace App\Http\Requests;
 
-use App\Enums\UserType;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
-class StoreUserRequest extends FormRequest
+class UpdateTraderRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,10 +22,8 @@ class StoreUserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'email'         => 'required|string|unique:users,email',
-            'first_name'    => 'required|string',
-            'last_name'     => 'required|string',
-            'password'      => 'required|string',
+            'working_hours' => 'sometimes|numeric',
+            'payroll_per_hour' => 'sometimes|numeric',
         ];
     }
 }

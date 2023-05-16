@@ -27,11 +27,6 @@ class UpdateUserRequest extends FormRequest
             'email'         => 'sometimes|string|unique:users,email',
             'first_name'    => 'sometimes|string',
             'last_name'     => 'sometimes|string',
-            'type'          => [
-                'sometimes',
-                'string',
-                Rule::in(UserType::getValues())
-            ],
             'password'      => 'sometimes|string',
         ];
     }

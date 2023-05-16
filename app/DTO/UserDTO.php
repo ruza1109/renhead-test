@@ -8,7 +8,6 @@ class UserDTO
         private string $email,
         private string $firstName,
         private string $lastName,
-        private string $type,
         private string $password,
     ) {}
 
@@ -42,17 +41,6 @@ class UserDTO
     public function setLastName(string $lastName): static
     {
         $this->lastName = $lastName;
-        return $this;
-    }
-
-    public function getType(): string
-    {
-        return $this->type;
-    }
-
-    public function setType(string $type): static
-    {
-        $this->type = $type;
         return $this;
     }
 

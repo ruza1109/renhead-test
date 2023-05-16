@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\DTO\UserDTO;
+use App\Enums\UserType;
 use App\Models\User;
 use App\Repositories\UserRepository;
 use Illuminate\Database\Eloquent\Collection;
@@ -19,13 +20,13 @@ class UserService
         return $this->userRepository->getAll();
     }
 
-    public function store(UserDTO $userDTO): User
+    public function store(UserDTO $userDTO, UserType $type = null): User
     {
         return User::create([
             'email' => $userDTO->getEmail(),
             'first_name' => $userDTO->getFirstName(),
             'last_name' => $userDTO->getLastName(),
-            'type' => $userDTO->getType(),
+            'type' => $type ? $type->value : UserType::APPROVER->value,
             'password' => Hash::make($userDTO->getPassword()),
         ]);
     }

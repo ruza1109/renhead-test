@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\JobController;
 use App\Http\Controllers\ProfessorController;
 use App\Http\Controllers\TraderController;
 use App\Http\Controllers\UserController;
@@ -45,5 +46,13 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/{professor}', [ProfessorController::class, 'show']);
         Route::patch('/{professor}', [ProfessorController::class, 'update']);
         Route::delete('/{professor}', [ProfessorController::class, 'delete']);
+    });
+
+    Route::prefix('/jobs')->group(function () {
+        Route::get('/', [JobController::class, 'index']);
+        Route::post('/{employeeType}/{employee}', [JobController::class, 'store']);
+        Route::get('/{job}', [JobController::class, 'show']);
+        Route::patch('/{job}', [JobController::class, 'update']);
+        Route::delete('/{job}', [JobController::class, 'delete']);
     });
 });

@@ -43,7 +43,7 @@ class JobController extends Controller
 
         $job = $this->jobService->store($jobDTO, $employeeType, $employee);
 
-        return response()->json([$job]);
+        return response()->json([$job], 201);
     }
 
     public function update(UpdateJobRequest $request, Job $job): JsonResponse

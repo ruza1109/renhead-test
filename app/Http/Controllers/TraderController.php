@@ -17,14 +17,14 @@ class TraderController extends Controller
 
     public function index(): JsonResponse
     {
-        return response()->json([
+        return response()->json(
             $this->traderService->getAll()
-        ]);
+        );
     }
 
     public function show(Trader $trader): JsonResponse
     {
-        return response()->json([$trader]);
+        return response()->json($trader);
     }
 
     public function store(StoreTraderRequest $request): JsonResponse
@@ -40,14 +40,14 @@ class TraderController extends Controller
 
         $trader = $this->traderService->store($traderDTO);
 
-        return response()->json([$trader]);
+        return response()->json($trader, 201);
     }
 
     public function update(UpdateTraderRequest $request, Trader $trader): JsonResponse
     {
         $trader = $this->traderService->update($trader, $request->validated());
 
-        return response()->json([$trader]);
+        return response()->json($trader);
     }
 
     public function delete(Trader $trader): JsonResponse

@@ -6,10 +6,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Trader extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
     protected $fillable = [
         'user_id',
@@ -19,6 +20,17 @@ class Trader extends Model
         'updated_at',
         'deleted_at',
     ];
+
+    public static function booted(): void
+    {
+        static::deleting(function ($trader) {
+            $trader->user()->delete();
+
+            $trader->jobs()->each(function ($job) {
+                $job->delete();
+            });
+        });
+    }
 
     public function user(): BelongsTo
     {

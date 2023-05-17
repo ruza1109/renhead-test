@@ -17,14 +17,14 @@ class ProfessorController extends Controller
 
     public function index(): JsonResponse
     {
-        return response()->json([
+        return response()->json(
             $this->professorService->getAll()
-        ]);
+        );
     }
 
     public function show(Professor $professor): JsonResponse
     {
-        return response()->json([$professor]);
+        return response()->json($professor);
     }
 
     public function store(StoreProfessorRequest $request): JsonResponse
@@ -42,14 +42,14 @@ class ProfessorController extends Controller
 
         $professor = $this->professorService->store($professorDTO);
 
-        return response()->json([$professor]);
+        return response()->json($professor, 201);
     }
 
     public function update(UpdateProfessorRequest $request, Professor $professor): JsonResponse
     {
         $professor = $this->professorService->update($professor, $request->validated());
 
-        return response()->json([$professor]);
+        return response()->json($professor);
     }
 
     public function delete(Professor $professor): JsonResponse

@@ -5,13 +5,14 @@ namespace App\Models;
 use App\Enums\UserType;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable, SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -37,6 +38,21 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
     ];
+
+    public static function booted(): void
+    {
+        static::deleting(function ($user) {
+            $user->traders()->each(function ($trader) {
+                $trader->delete();
+            });
+
+            $user->professors()->each(function ($professor) {
+                $professor->delete();
+            });
+
+            $user->approvals()->where('user_id', $user->id)->delete();
+        });
+    }
 
     public function traders(): HasMany
     {

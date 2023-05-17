@@ -4,6 +4,7 @@ use App\Http\Controllers\ApprovalController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\JobController;
 use App\Http\Controllers\ProfessorController;
+use App\Http\Controllers\StatisticController;
 use App\Http\Controllers\TraderController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -58,4 +59,5 @@ Route::middleware('auth:sanctum')->group(function () {
     });
 
     Route::post('/approvals/{job}/approve', [ApprovalController::class, 'approve'])->name('approval.approve');
+    Route::get('/statistics', [StatisticController::class, 'getStatistics'])->name('statistic.getStatistics');
 });

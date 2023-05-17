@@ -18,13 +18,6 @@ return new class extends Migration
             $table->float('payroll_per_hour');
             $table->timestamps();
             $table->softDeletes();
-
-            $table
-                ->foreign('user_id')
-                ->references('id')
-                ->on('users')
-                ->onDelete('cascade')
-            ;
         });
     }
 

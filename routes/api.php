@@ -20,42 +20,42 @@ use Illuminate\Support\Facades\Route;
 */
 
 // Auth routes
-Route::post('/register', [AuthController::class, 'register']);
-Route::post('/login', [AuthController::class, 'login']);
+Route::post('/register', [AuthController::class, 'register'])->name('register');
+Route::post('/login', [AuthController::class, 'login'])->name('login');
 
 Route::middleware('auth:sanctum')->group(function () {
-    Route::post('/logout', [AuthController::class, 'logout']);
+    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
     Route::prefix('/users')->group(function () {
-        Route::get('/', [UserController::class, 'index']);
-        Route::get('/{user}', [UserController::class, 'show']);
-        Route::patch('/{user}', [UserController::class, 'update']);
-        Route::delete('/{user}', [UserController::class, 'delete']);
+        Route::get('/', [UserController::class, 'index'])->name('user.index');
+        Route::get('/{user}', [UserController::class, 'show'])->name('user.show');
+        Route::patch('/{user}', [UserController::class, 'update'])->name('user.update');
+        Route::delete('/{user}', [UserController::class, 'delete'])->name('user.delete');
     });
 
     Route::prefix('/traders')->group(function () {
-        Route::get('/', [TraderController::class, 'index']);
-        Route::post('/', [TraderController::class, 'store']);
-        Route::get('/{trader}', [TraderController::class, 'show']);
-        Route::patch('/{trader}', [TraderController::class, 'update']);
-        Route::delete('/{trader}', [TraderController::class, 'delete']);
+        Route::get('/', [TraderController::class, 'index'])->name('trader.index');
+        Route::post('/', [TraderController::class, 'store'])->name('trader.store');
+        Route::get('/{trader}', [TraderController::class, 'show'])->name('trader.show');
+        Route::patch('/{trader}', [TraderController::class, 'update'])->name('trader.update');
+        Route::delete('/{trader}', [TraderController::class, 'delete'])->name('trader.delete');
     });
 
     Route::prefix('/professors')->group(function () {
-        Route::get('/', [ProfessorController::class, 'index']);
-        Route::post('/', [ProfessorController::class, 'store']);
-        Route::get('/{professor}', [ProfessorController::class, 'show']);
-        Route::patch('/{professor}', [ProfessorController::class, 'update']);
-        Route::delete('/{professor}', [ProfessorController::class, 'delete']);
+        Route::get('/', [ProfessorController::class, 'index'])->name('professor.index');
+        Route::post('/', [ProfessorController::class, 'store'])->name('professor.store');
+        Route::get('/{professor}', [ProfessorController::class, 'show'])->name('professor.show');
+        Route::patch('/{professor}', [ProfessorController::class, 'update'])->name('professor.update');
+        Route::delete('/{professor}', [ProfessorController::class, 'delete'])->name('professor.delete');
     });
 
     Route::prefix('/jobs')->group(function () {
-        Route::get('/', [JobController::class, 'index']);
-        Route::post('/{employeeType}/{employee}', [JobController::class, 'store']);
-        Route::get('/{job}', [JobController::class, 'show']);
-        Route::patch('/{job}', [JobController::class, 'update']);
-        Route::delete('/{job}', [JobController::class, 'delete']);
+        Route::get('/', [JobController::class, 'index'])->name('job.index');
+        Route::post('/{employeeType}/{employee}', [JobController::class, 'store'])->name('job.store');
+        Route::get('/{job}', [JobController::class, 'show'])->name('job.show');
+        Route::patch('/{job}', [JobController::class, 'update'])->name('job.update');
+        Route::delete('/{job}', [JobController::class, 'delete'])->name('job.delete');
     });
 
-    Route::post('/approvals/{job}/approve', [ApprovalController::class, 'approve']);
+    Route::post('/approvals/{job}/approve', [ApprovalController::class, 'approve'])->name('approval.approve');
 });

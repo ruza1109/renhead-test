@@ -10,6 +10,6 @@ class UserMustBeApproverException extends \Exception
     {
         return response()->json([
             'error' => 'User must be approver in order to approve.'
-        ], 422);
+        ], 403);
     }
 }

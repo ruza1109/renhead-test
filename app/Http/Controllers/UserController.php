@@ -15,21 +15,19 @@ class UserController extends Controller
 
     public function index(): JsonResponse
     {
-        return response()->json([
-            $this->userService->getAll()
-        ]);
+        return response()->json($this->userService->getAll());
     }
 
     public function show(User $user): JsonResponse
     {
-        return response()->json([$user]);
+        return response()->json($user);
     }
 
     public function update(UpdateUserRequest $request, User $user): JsonResponse
     {
         $user = $this->userService->update($user, $request->validated());
 
-        return response()->json([$user]);
+        return response()->json($user);
     }
 
     public function delete(User $user): JsonResponse

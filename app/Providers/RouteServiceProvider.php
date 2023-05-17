@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Models\Professor;
+use App\Models\Trader;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Http\Request;
@@ -30,11 +32,21 @@ class RouteServiceProvider extends ServiceProvider
 
         $this->routes(function () {
             Route::middleware('api')
-                ->prefix('api')
+                ->prefix('api/v1')
                 ->group(base_path('routes/api.php'));
 
             Route::middleware('web')
                 ->group(base_path('routes/web.php'));
+        });
+
+        Route::bind('employeeType', function ($type) {
+            $model = match ($type) {
+                'professors' => Professor::class,
+                'traders' => Trader::class,
+                default => abort(404),
+            };
+
+            return new $model;
         });
     }
 }

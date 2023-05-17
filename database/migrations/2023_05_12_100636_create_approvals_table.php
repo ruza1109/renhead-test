@@ -17,18 +17,6 @@ return new class extends Migration
             $table->enum('status', ['APPROVED', 'DISAPPROVED']);
             $table->timestamps();
             $table->softDeletes();
-
-            $table
-                ->foreign('user_id')
-                ->references('id')
-                ->on('users')
-            ;
-
-            $table
-                ->foreign('job_id')
-                ->references('id')
-                ->on('jobs')
-            ;
         });
     }
 
